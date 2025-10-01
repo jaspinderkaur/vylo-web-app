@@ -2,12 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 
-// Load Plausible Analytics
-const script = document.createElement('script');
-script.defer = true;
-script.dataset.domain = import.meta.env.VITE_PLAUSIBLE_DOMAIN || 'localhost';
-script.src = 'https://plausible.io/js/script.js';
-document.head.appendChild(script);
+// Programmatic Plausible Analytics injection
+function injectPlausible(domain: string) {
+  const s = document.createElement('script');
+  s.setAttribute('defer', '');
+  s.setAttribute('data-domain', domain);
+  s.src = 'https://plausible.io/js/script.js';
+  document.head.appendChild(s);
+}
+
+// Conditionally load Plausible Analytics
+if (import.meta.env.PROD && 
+    import.meta.env.VITE_ENABLE_ANALYTICS === '1' && 
+    /\.?vylohub\.com$/.test(window.location.hostname)) {
+  injectPlausible('vylohub.com');
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

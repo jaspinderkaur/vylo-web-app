@@ -1,4 +1,4 @@
-import { trackMoodSelected } from '../services/analytics';
+import { track } from '../utils/plausible';
 import type { Mood } from '../types';
 
 interface MoodSelectorProps {
@@ -14,7 +14,7 @@ const moods: { value: Mood; label: string; emoji: string; description: string }[
 
 export const MoodSelector = ({ onMoodSelect, selectedMood }: MoodSelectorProps) => {
   const handleMoodClick = (mood: Mood) => {
-    trackMoodSelected(mood);
+    track('mood_selected', { mood });
     onMoodSelect(mood);
   };
 

@@ -1,18 +1,11 @@
 // Analytics service for Plausible integration
-
-declare global {
-  interface Window {
-    plausible?: (event: string, options?: { props?: Record<string, any> }) => void;
-  }
-}
+import { track } from '../utils/plausible';
 
 export const trackEvent = (event: string, properties?: Record<string, any>) => {
-  if (typeof window !== 'undefined' && window.plausible) {
-    try {
-      window.plausible(event, { props: properties });
-    } catch (error) {
-      console.warn('Analytics tracking failed:', error);
-    }
+  try {
+    track(event, properties);
+  } catch (error) {
+    console.warn('Analytics tracking failed:', error);
   }
 };
 

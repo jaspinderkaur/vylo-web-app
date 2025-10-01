@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useFirestore } from './hooks/useFirestore';
+import { usePlausiblePageviews } from './hooks/usePlausiblePageviews';
 import { MoodSelector } from './components/MoodSelector';
 import { HabitCard } from './components/HabitCard';
 import type { Mood } from './types';
@@ -8,6 +9,11 @@ import './App.css';
 function App() {
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
   const { habits, loading, error } = useFirestore(selectedMood);
+
+  // Example usage: Track pageviews for SPA navigation
+  // In a real app with React Router, you'd use useLocation().pathname
+  const currentPathname = selectedMood ? `/habits/${selectedMood}` : '/';
+  usePlausiblePageviews({ pathname: currentPathname });
 
   const handleMoodSelect = (mood: Mood) => {
     setSelectedMood(mood);
@@ -100,6 +106,18 @@ function App() {
 
       <footer className="app-footer">
         <p>Build better habits, one mood at a time ✨</p>
+        <p className="analytics-notice">
+          We use{' '}
+          <a 
+            href="https://plausible.io" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="analytics-link"
+          >
+            privacy-friendly analytics
+          </a>
+          .
+        </p>
       </footer>
     </div>
   );

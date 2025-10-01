@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { trackHabitCompleted } from '../services/analytics';
+import { track } from '../utils/plausible';
 import { DopamineAnimation } from './DopamineAnimation';
 import type { Habit, Mood } from '../types';
 
@@ -17,7 +17,7 @@ export const HabitCard = ({ habit, mood }: HabitCardProps) => {
     
     setIsCompleted(true);
     setShowAnimation(true);
-    trackHabitCompleted(habit.id, mood);
+    track('habit_completed', { mood, habit_title: habit.title });
   };
 
   const handleAnimationComplete = () => {
