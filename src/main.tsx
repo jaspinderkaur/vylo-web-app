@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+import { logToProduction } from './utils/productionLogger'
 
 // Programmatic Plausible Analytics injection
 function injectPlausible(domain: string) {
@@ -12,13 +13,16 @@ function injectPlausible(domain: string) {
 }
 
 // Conditionally load Plausible Analytics
-console.log('Analytics Debug:', {
+const debugInfo = {
   isProd: import.meta.env.PROD,
   analyticsEnabled: import.meta.env.VITE_ENABLE_ANALYTICS,
   hostname: window.location.hostname,
   hostnameMatch: /\.?vylohub\.com$/.test(window.location.hostname),
   allEnvVars: import.meta.env
-});
+};
+
+console.log('Analytics Debug:', debugInfo);
+logToProduction('Analytics Debug', debugInfo);
 
 // More permissive conditions for testing
 const shouldLoadAnalytics = 
@@ -28,17 +32,21 @@ const shouldLoadAnalytics =
 
 if (shouldLoadAnalytics) {
   console.log('Loading Plausible Analytics...');
+  logToProduction('Loading Plausible Analytics...');
   // Use production domain for testing
   const domain = 'vylohub.com';
   injectPlausible(domain);
 } else {
   console.log('Analytics not loaded - conditions not met');
-  console.log('Debug info:', {
+  logToProduction('Analytics not loaded - conditions not met');
+  const debugInfo = {
     isProd: import.meta.env.PROD,
     analyticsEnabled: import.meta.env.VITE_ENABLE_ANALYTICS,
     hostname: window.location.hostname,
     shouldLoad: shouldLoadAnalytics
-  });
+  };
+  console.log('Debug info:', debugInfo);
+  logToProduction('Debug info', debugInfo);
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -1,6 +1,7 @@
 import { track } from '../utils/plausible';
 import { forceLoadAnalytics } from '../utils/forceAnalytics';
 import { debugPlausible } from '../utils/debugPlausible';
+import { logToProduction, clearDebugLog } from '../utils/productionLogger';
 
 export const AnalyticsTest = () => {
   const testAnalytics = () => {
@@ -15,7 +16,13 @@ export const AnalyticsTest = () => {
 
   const debugAnalytics = () => {
     console.log('Running comprehensive debug...');
+    logToProduction('Running comprehensive debug...');
     debugPlausible();
+  };
+
+  const clearLogs = () => {
+    clearDebugLog();
+    console.clear();
   };
 
   return (
@@ -57,9 +64,20 @@ export const AnalyticsTest = () => {
         border: 'none',
         padding: '5px 10px',
         borderRadius: '3px',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        marginRight: '5px'
       }}>
         Debug
+      </button>
+      <button onClick={clearLogs} style={{
+        background: '#ff4757',
+        color: 'white',
+        border: 'none',
+        padding: '5px 10px',
+        borderRadius: '3px',
+        cursor: 'pointer'
+      }}>
+        Clear
       </button>
     </div>
   );
