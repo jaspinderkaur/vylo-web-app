@@ -22,5 +22,5 @@ export function track(event: string, props?: Record<string, any>) {
   }
   
   console.log('Sending event to Plausible:', event, props);
-  window.plausible(event, props ? { props } : undefined);
+  window.plausible?.(event, props ? { props } : undefined);
 }
