@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
-import habitsStore from '../storage/habitsStore';
-
 interface WinsBannerProps {
+  wins: number;
   showWeekView?: boolean;
   onToggleWeekView?: () => void;
   onAddHabit?: () => void;
@@ -9,42 +7,12 @@ interface WinsBannerProps {
 }
 
 export const WinsBanner = ({ 
+  wins,
   showWeekView = false, 
   onToggleWeekView, 
   onAddHabit, 
   hasHabits = false 
 }: WinsBannerProps) => {
-  const [wins, setWins] = useState(0);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadWins = async () => {
-      try {
-        await habitsStore.initialize();
-        const totalWins = await habitsStore.getAccumulatedWins();
-        setWins(totalWins);
-      } catch (error) {
-        console.error('Failed to load wins:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadWins();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="wins-banner" role="region" aria-labelledby="wins-heading">
-        <div className="wins-display">
-          <div className="wins-counter">
-            <div className="loading-spinner"></div>
-            <span>Loading wins...</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="wins-banner" role="region" aria-labelledby="wins-heading">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { AddHabitModal } from './AddHabitModal';
 import { DeleteHabitModal } from './DeleteHabitModal';
 import { HabitTile } from './HabitTile';
@@ -99,6 +99,15 @@ export const MyHabitsSection = () => {
     setHabitToDelete(null);
   };
 
+  // Calculate total wins from habits
+  const totalWins = useMemo(() => {
+    return habits.reduce((total, habit) => {
+      const completions = habit.completions || {};
+      const wins = Object.values(completions).filter(Boolean).length;
+      return total + wins;
+    }, 0);
+  }, [habits]);
+
   if (loading) {
     return (
       <div className="personal-habits-section">
@@ -125,6 +134,7 @@ export const MyHabitsSection = () => {
       {habits.length > 0 && (
         <div className="wins-banner-container">
           <WinsBanner 
+            wins={totalWins}
             showWeekView={showWeekView}
             onToggleWeekView={() => setShowWeekView(!showWeekView)}
             onAddHabit={() => setIsModalOpen(true)}
