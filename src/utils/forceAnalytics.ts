@@ -11,7 +11,7 @@ export const forceLoadAnalytics = () => {
   // Create new script
   const script = document.createElement('script');
   script.setAttribute('defer', '');
-  script.setAttribute('data-domain', 'vylohub.com');
+  script.setAttribute('data-domain', 'vylohub.com'); // Use production domain for testing
   script.src = 'https://plausible.io/js/script.js';
   script.onload = () => {
     console.log('Plausible script loaded successfully');

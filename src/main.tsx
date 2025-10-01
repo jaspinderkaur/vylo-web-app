@@ -28,7 +28,9 @@ const shouldLoadAnalytics =
 
 if (shouldLoadAnalytics) {
   console.log('Loading Plausible Analytics...');
-  injectPlausible('vylohub.com');
+  // Use production domain for testing
+  const domain = 'vylohub.com';
+  injectPlausible(domain);
 } else {
   console.log('Analytics not loaded - conditions not met');
   console.log('Debug info:', {

@@ -1,5 +1,6 @@
 import { track } from '../utils/plausible';
 import { forceLoadAnalytics } from '../utils/forceAnalytics';
+import { debugPlausible } from '../utils/debugPlausible';
 
 export const AnalyticsTest = () => {
   const testAnalytics = () => {
@@ -10,6 +11,11 @@ export const AnalyticsTest = () => {
   const forceAnalytics = () => {
     console.log('Force loading analytics...');
     forceLoadAnalytics();
+  };
+
+  const debugAnalytics = () => {
+    console.log('Running comprehensive debug...');
+    debugPlausible();
   };
 
   return (
@@ -40,9 +46,20 @@ export const AnalyticsTest = () => {
         border: 'none',
         padding: '5px 10px',
         borderRadius: '3px',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        marginRight: '5px'
       }}>
         Force Load
+      </button>
+      <button onClick={debugAnalytics} style={{
+        background: '#4ecdc4',
+        color: 'white',
+        border: 'none',
+        padding: '5px 10px',
+        borderRadius: '3px',
+        cursor: 'pointer'
+      }}>
+        Debug
       </button>
     </div>
   );
