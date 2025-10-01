@@ -1,12 +1,7 @@
-# Apache SPA fallback for /web-app/ subdirectory
+# Apache SPA fallback for app.vylohub.com
 RewriteEngine On
 
-# Handle client-side routing for /web-app/ subdirectory
+# Handle client-side routing
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} ^/web-app/
-RewriteRule ^web-app/(.*)$ /web-app/index.html [L]
-
-# Fallback for direct access to /web-app/
-RewriteCond %{REQUEST_URI} ^/web-app/?$
-RewriteRule ^web-app/?$ /web-app/index.html [L]
+RewriteRule . /index.html [L]
