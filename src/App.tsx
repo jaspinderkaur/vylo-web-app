@@ -77,6 +77,18 @@ function App() {
               </div>
             )}
 
+            {habits.length > 0 && (
+              <div className="mood-switch-section">
+                <button 
+                  onClick={handleReset} 
+                  className="mood-switch-button"
+                  aria-label="Try a different mood"
+                >
+                  Try a different mood
+                </button>
+              </div>
+            )}
+
             {!loading && !error && habits.length === 0 && (
               <div className="no-habits">
                 <p>No habits found for this mood. Try a different mood!</p>
