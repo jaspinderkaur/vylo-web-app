@@ -3,6 +3,7 @@ import { useFirestore } from './hooks/useFirestore';
 import { usePlausiblePageviews } from './hooks/usePlausiblePageviews';
 import { MoodSelector } from './components/MoodSelector';
 import { HabitCard } from './components/HabitCard';
+import { AnalyticsTest } from './components/AnalyticsTest';
 import type { Mood } from './types';
 import './App.css';
 
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className="app">
+      <AnalyticsTest />
       <header className="app-header">
         <h1 className="app-title">Vylo</h1>
         <p className="app-subtitle">Micro-habits for your mood</p>

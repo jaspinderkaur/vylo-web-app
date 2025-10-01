@@ -12,10 +12,20 @@ function injectPlausible(domain: string) {
 }
 
 // Conditionally load Plausible Analytics
+console.log('Analytics Debug:', {
+  isProd: import.meta.env.PROD,
+  analyticsEnabled: import.meta.env.VITE_ENABLE_ANALYTICS,
+  hostname: window.location.hostname,
+  hostnameMatch: /\.?vylohub\.com$/.test(window.location.hostname)
+});
+
 if (import.meta.env.PROD && 
     import.meta.env.VITE_ENABLE_ANALYTICS === '1' && 
     /\.?vylohub\.com$/.test(window.location.hostname)) {
+  console.log('Loading Plausible Analytics...');
   injectPlausible('vylohub.com');
+} else {
+  console.log('Analytics not loaded - conditions not met');
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
