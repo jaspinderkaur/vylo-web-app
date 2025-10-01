@@ -79,6 +79,21 @@ function App() {
                 </button>
               </div>
             )}
+
+            {habits.length > 0 && (
+              <div className="feedback-section">
+                <p className="feedback-text">How was your experience with these habits?</p>
+                <a 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSfBSMFHBlK89ohvDFj1J141E2mMCTLOcbLmXeHfR5KXIFU6Sg/viewform?usp=dialog" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="feedback-link"
+                  aria-label="Open Vylo Beta Feedback form in new tab"
+                >
+                  Share your feedback ✨
+                </a>
+              </div>
+            )}
           </div>
         )}
       </main>
