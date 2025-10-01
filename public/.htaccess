@@ -1,0 +1,12 @@
+# Apache SPA fallback for /web-app/ subdirectory
+RewriteEngine On
+
+# Handle client-side routing for /web-app/ subdirectory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^/web-app/
+RewriteRule ^web-app/(.*)$ /web-app/index.html [L]
+
+# Fallback for direct access to /web-app/
+RewriteCond %{REQUEST_URI} ^/web-app/?$
+RewriteRule ^web-app/?$ /web-app/index.html [L]
