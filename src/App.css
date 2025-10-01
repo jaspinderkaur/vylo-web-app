@@ -17,6 +17,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-attachment: fixed;
 }
 
 /* Header */
@@ -48,7 +50,7 @@ body {
 /* Main content */
 .app-main {
   flex: 1;
-  padding: 2rem 1rem;
+  padding: 0 1rem 2rem 1rem; /* Remove top padding to eliminate gap */
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -474,13 +476,13 @@ body {
 .analytics-notice {
   margin-top: 0.5rem;
   font-size: 0.8rem;
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 .analytics-link {
   color: rgba(255, 255, 255, 0.9);
   text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 0.5);
+  text-decoration-color: rgba(255, 255, 255, 0.7);
   transition: all 0.2s ease;
 }
 
@@ -669,4 +671,1054 @@ body {
   outline: 3px solid #ffd700;
   outline-offset: 2px;
   box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+
+/* Wins Banner Container */
+.wins-banner-container {
+  text-align: center;
+  margin: 0 0 2rem 0;
+  padding: 1rem;
+}
+
+/* Wins Banner - Centered within white container */
+.wins-banner {
+  text-align: center;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+}
+
+/* Wins Card Actions - Inside purple card */
+.wins-card-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.wins-card-actions .week-view-btn,
+.wins-card-actions .add-habit-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.wins-card-actions .week-view-btn:hover,
+.wins-card-actions .add-habit-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.wins-card-actions .add-habit-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #8A4FFF;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.wins-card-actions .add-habit-btn:hover {
+  background: white;
+  color: #8A4FFF;
+  transform: translateY(-2px);
+}
+
+.wins-banner .wins-display {
+  display: inline-block;
+  background: #8A4FFF; /* Vylo theme purple/darker blue background */
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  border: 2px solid #8A4FFF; /* Vylo theme purple/darker blue border */
+  box-shadow: 0 8px 32px rgba(138, 79, 255, 0.3);
+  text-align: center;
+}
+
+.wins-banner .wins-number-large {
+  color: white;
+  font-weight: 900;
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.wins-banner .wins-counter {
+  color: white; /* White text for blue background */
+  font-size: 1.5rem; /* Increased from 1.1rem by 4 points (0.4rem) */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.wins-banner .wins-subtext {
+  color: rgba(255, 255, 255, 0.9); /* Semi-transparent white for blue background */
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Personal Habits Section - No background (inherits from container) */
+.personal-habits-section {
+  margin-bottom: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Personal Habits Container - White background for entire section */
+.personal-habits-container {
+  background: white;
+  margin: 0;
+  padding: 2rem 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-top: -1px; /* Remove any gap between header and white section */
+}
+
+/* Content wrapper inside personal habits container */
+.personal-habits-container .personal-habits-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Ensure MyHabitsSection has solid white background */
+.my-habits-section {
+  background: white !important;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Divider */
+.section-divider {
+  display: flex;
+  align-items: center;
+  margin: 3rem 0;
+  padding: 0 2rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.divider-text {
+  padding: 0 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.personal-habits-section .habits-header h2::before {
+  content: '🎯 ';
+  font-size: 1.2rem;
+}
+
+.habits-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.habits-header h2 {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.habits-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.wins-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  background: rgba(138, 79, 255, 0.1);
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(138, 79, 255, 0.2);
+  position: relative;
+}
+
+.wins-counter {
+  color: #8A4FFF;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+
+.wins-number {
+  font-weight: 800;
+  font-size: 1.4rem;
+  background: linear-gradient(45deg, #8A4FFF, #3BCBFF, #8A4FFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(138, 79, 255, 0.3);
+  animation: numberPulse 2s ease-in-out infinite;
+}
+
+.wins-subtext {
+  color: #666;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.wins-subtext::after {
+  content: ' ✨';
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.week-view-btn {
+  background: rgba(138, 79, 255, 0.1);
+  color: #8A4FFF;
+  border: 1px solid rgba(138, 79, 255, 0.3);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.25rem;
+}
+
+.week-view-btn:hover {
+  background: rgba(138, 79, 255, 0.2);
+  color: #8A4FFF;
+  border-color: rgba(138, 79, 255, 0.5);
+}
+
+.week-view-btn:focus {
+  outline: 2px solid #ffd700;
+  outline-offset: 1px;
+}
+
+.add-habit-btn {
+  background: linear-gradient(45deg, #8A4FFF, #3BCBFF);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(138, 79, 255, 0.3);
+}
+
+.add-habit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(138, 79, 255, 0.4);
+}
+
+.add-habit-btn:focus {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
+}
+
+.habits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+/* Centered Habits Grid */
+.habits-grid-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.habits-grid-centered .habit-tile {
+  width: 100%;
+  max-width: 400px;
+}
+
+.habits-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Empty State Icon */
+.empty-state-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.icon-container:hover {
+  transform: scale(1.05);
+}
+
+.icon-container:active {
+  transform: scale(0.95);
+}
+
+.icon-container:focus {
+  outline: 3px solid #FFD93D;
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.habit-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.habit-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8A4FFF, #3BCBFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(138, 79, 255, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.habit-plus {
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  animation: bounce 1.5s ease-in-out infinite;
+  line-height: 1;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 16px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.sparkle-1 {
+  top: 10px;
+  right: 10px;
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  bottom: 15px;
+  left: 5px;
+  animation-delay: 0.7s;
+}
+
+.sparkle-3 {
+  top: 20px;
+  left: 15px;
+  animation-delay: 1.4s;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 32px rgba(138, 79, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(138, 79, 255, 0.4);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+.habits-loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+/* Habit Tile */
+.habit-tile {
+  background: rgba(138, 79, 255, 0.05);
+  border: 1px solid rgba(138, 79, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.habit-tile:hover {
+  background: rgba(138, 79, 255, 0.1);
+  border-color: rgba(138, 79, 255, 0.3);
+}
+
+.habit-tile.completed {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.habit-tile.animating {
+  animation: habitBounce 0.5s ease-out;
+}
+
+.habit-tile-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.habit-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.habit-name {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.3;
+}
+
+.habit-category {
+  display: inline-block;
+  background: rgba(102, 126, 234, 0.2);
+  color: #667eea;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.habit-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(138, 79, 255, 0.3); /* Match card border color */
+  color: #8A4FFF; /* Purple color to match card border */
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.habit-toggle:hover {
+  background: rgba(138, 79, 255, 0.1);
+  border-color: rgba(138, 79, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.habit-toggle.completed {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  border-color: #22c55e;
+  color: white;
+}
+
+.habit-toggle:focus {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
+}
+
+.habit-success-message {
+  position: absolute;
+  top: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  animation: successSlideIn 0.3s ease-out;
+  z-index: 10;
+}
+
+.habit-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 0.6s ease-out;
+}
+
+@keyframes habitBounce {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+  }
+  25% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    transform: scale(0.98);
+    box-shadow: 0 0 25px 5px rgba(34, 197, 94, 0.4);
+  }
+  75% {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px 3px rgba(34, 197, 94, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes successSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes winsShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes numberPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes myHabitsShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes adaptiveHabitsShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.modal-close:focus {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* Form Styles */
+.add-habit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-input,
+.form-select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.form-input.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.form-error {
+  color: #ef4444;
+  font-size: 0.8rem;
+}
+
+.frequency-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.radio-option:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.radio-option input[type="radio"] {
+  margin: 0;
+}
+
+.custom-frequency {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:focus,
+.btn-secondary:focus {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
+}
+
+/* Adaptive Habits Section - Gradient Background */
+.adaptive-habits-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header .section-title::before {
+  content: '🧠 ';
+  font-size: 1.2rem;
+}
+
+.section-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* My Habits Section specific subtitle */
+.my-habits-section .habits-header h2::after {
+  content: ' - Your custom habits';
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* Week View Section */
+.week-view-section {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.week-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.week-bars-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.week-bars-title {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.week-bars-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+}
+
+.week-bars-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  align-items: end;
+  height: 80px;
+}
+
+.week-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  height: 100%;
+}
+
+.week-bar {
+  width: 100%;
+  min-height: 4px;
+  background: linear-gradient(
+    to top,
+    rgba(102, 126, 234, 0.3) 0%,
+    rgba(102, 126, 234, 0.6) 50%,
+    rgba(102, 126, 234, 0.9) 100%
+  );
+  border-radius: 2px 2px 0 0;
+  transition: all 0.3s ease;
+  position: relative;
+  opacity: 0.4;
+}
+
+.week-bar.has-completions {
+  opacity: 1;
+  background: linear-gradient(
+    to top,
+    rgba(34, 197, 94, 0.3) 0%,
+    rgba(34, 197, 94, 0.6) 50%,
+    rgba(34, 197, 94, 0.9) 100%
+  );
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+}
+
+.week-bar.today {
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.2);
+}
+
+.week-bar-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .my-habits-section {
+    padding: 1rem;
+  }
+  
+  .habits-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .habits-actions {
+    justify-content: space-between;
+  }
+  
+  .habits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+    margin: 0.5rem;
+    max-height: calc(100vh - 1rem);
+  }
+  
+  .modal-header,
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .adaptive-habits-section {
+    margin-top: 1.5rem;
+  }
+  
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
+  
+  .wins-display {
+    align-items: stretch;
+  }
+  
+  .week-view-section {
+    margin: 1rem 0;
+    padding: 0.75rem;
+  }
+  
+  .week-bars-grid {
+    height: 60px;
+    gap: 0.25rem;
+  }
+  
+  .week-bar-label {
+    font-size: 0.6rem;
+  }
 }

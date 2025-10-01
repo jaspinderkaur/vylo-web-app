@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useFirestore } from './hooks/useFirestore';
 import { usePlausiblePageviews } from './hooks/usePlausiblePageviews';
+import { MyHabitsSection } from './components/MyHabitsSection';
 import { MoodSelector } from './components/MoodSelector';
 import { HabitCard } from './components/HabitCard';
 import type { Mood } from './types';
@@ -31,7 +32,26 @@ function App() {
       </header>
 
       <main className="app-main">
-        {!selectedMood ? (
+        {/* Personal Habits Section - White background container */}
+        <div className="personal-habits-container">
+          <MyHabitsSection />
+        </div>
+        
+        {/* Section Divider */}
+        <div className="section-divider">
+          <div className="divider-line"></div>
+          <div className="divider-text">AI-Powered Suggestions</div>
+          <div className="divider-line"></div>
+        </div>
+        
+        {/* Adaptive Mood-based Habits Section */}
+        <div className="adaptive-habits-section">
+          <div className="section-header">
+            <h2 className="section-title">AI-Powered Habits</h2>
+            <p className="section-subtitle">Smart habits tailored to your current mood</p>
+          </div>
+          
+          {!selectedMood ? (
           <MoodSelector 
             onMoodSelect={handleMoodSelect} 
             selectedMood={selectedMood} 
@@ -107,6 +127,7 @@ function App() {
             )}
           </div>
         )}
+        </div>
       </main>
 
       <footer className="app-footer">
