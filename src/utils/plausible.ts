@@ -1,33 +1,13 @@
 declare global {
   interface Window {
-    plausible?: (event: string, opts?: { props?: Record<string, any> }) => void;
+    plausible?: (event: string, opts?: { props?: Record<string, any> }) => void
   }
 }
 
-import { logToProduction } from './productionLogger';
-
 export function track(event: string, props?: Record<string, any>) {
   const isProdHost = typeof window !== 'undefined' && /\.?vylohub\.com$/.test(window.location.hostname);
-  const plausibleExists = typeof window.plausible === 'function';
   
-  const trackDebug = {
-    event,
-    props,
-    isProdHost,
-    plausibleExists,
-    hostname: window.location.hostname
-  };
+  if (!isProdHost || typeof window.plausible !== 'function') return;
   
-  console.log('Track Debug:', trackDebug);
-  logToProduction('Track Debug', trackDebug);
-  
-  if (!isProdHost || !plausibleExists) {
-    console.log('Track skipped - conditions not met');
-    logToProduction('Track skipped - conditions not met');
-    return;
-  }
-  
-  console.log('Sending event to Plausible:', event, props);
-  logToProduction('Sending event to Plausible', { event, props });
-  window.plausible?.(event, props ? { props } : undefined);
+  window.plausible(event, props ? { props } : undefined);
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import { logToProduction } from './utils/productionLogger'
 
 // Programmatic Plausible Analytics injection
 function injectPlausible(domain: string) {
@@ -9,22 +8,20 @@ function injectPlausible(domain: string) {
   s.setAttribute('defer', '');
   s.setAttribute('data-domain', domain);
   s.src = 'https://plausible.io/js/script.js';
+  
+  s.onload = () => {
+    console.log('Plausible script loaded successfully');
+  };
+  
+  s.onerror = (error) => {
+    console.error('Failed to load Plausible script:', error);
+  };
+  
   document.head.appendChild(s);
+  console.log('Plausible script element added to head');
 }
 
 // Conditionally load Plausible Analytics
-const debugInfo = {
-  isProd: import.meta.env.PROD,
-  analyticsEnabled: import.meta.env.VITE_ENABLE_ANALYTICS,
-  hostname: window.location.hostname,
-  hostnameMatch: /\.?vylohub\.com$/.test(window.location.hostname),
-  allEnvVars: import.meta.env
-};
-
-console.log('Analytics Debug:', debugInfo);
-logToProduction('Analytics Debug', debugInfo);
-
-// More permissive conditions for testing
 const shouldLoadAnalytics = 
   (import.meta.env.PROD && import.meta.env.VITE_ENABLE_ANALYTICS === '1') ||
   (import.meta.env.VITE_ENABLE_ANALYTICS === '1' && /\.?vylohub\.com$/.test(window.location.hostname)) ||
@@ -32,21 +29,10 @@ const shouldLoadAnalytics =
 
 if (shouldLoadAnalytics) {
   console.log('Loading Plausible Analytics...');
-  logToProduction('Loading Plausible Analytics...');
-  // Use production domain for testing
-  const domain = 'vylohub.com';
+  const domain = 'app.vylohub.com';
   injectPlausible(domain);
 } else {
   console.log('Analytics not loaded - conditions not met');
-  logToProduction('Analytics not loaded - conditions not met');
-  const debugInfo = {
-    isProd: import.meta.env.PROD,
-    analyticsEnabled: import.meta.env.VITE_ENABLE_ANALYTICS,
-    hostname: window.location.hostname,
-    shouldLoad: shouldLoadAnalytics
-  };
-  console.log('Debug info:', debugInfo);
-  logToProduction('Debug info', debugInfo);
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
