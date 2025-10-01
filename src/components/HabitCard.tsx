@@ -37,10 +37,15 @@ export const HabitCard = ({ habit, mood }: HabitCardProps) => {
       </div>
       
       <div className="habit-content">
-        <p className="habit-instructions">{habit.instructions}</p>
+        <div className="habit-instructions">
+          {habit.instructions.split(';').map((instruction, index) => (
+            <div key={index} className="instruction-step">
+              {instruction.trim()}
+            </div>
+          ))}
+        </div>
         <div className="habit-dopamine-hook">
-          <span className="dopamine-label">💫 Dopamine Hook:</span>
-          <span className="dopamine-text">{habit.dopamine_hook}</span>
+          <span className="dopamine-text">⚡ Boost you'll get: {habit.dopamine_hook}</span>
         </div>
       </div>
       

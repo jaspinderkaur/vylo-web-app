@@ -276,56 +276,75 @@ body {
   font-size: 0.95rem;
 }
 
-.habit-dopamine-hook {
-  background: linear-gradient(45deg, #ffd700, #ffed4e);
-  padding: 1rem;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.instruction-step {
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
 }
 
-.dopamine-label {
-  font-weight: 600;
-  color: #333;
-  font-size: 0.9rem;
+.instruction-step:before {
+  content: "•";
+  color: #667eea;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.instruction-step:last-child {
+  margin-bottom: 0;
+}
+
+.habit-dopamine-hook {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-left: 4px solid #667eea;
+  backdrop-filter: blur(10px);
 }
 
 .dopamine-text {
-  color: #333;
+  color: #667eea;
   font-weight: 500;
   font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .habit-complete-btn {
   width: 100%;
-  background: linear-gradient(45deg, #ffd700, #ffed4e);
-  border: none;
-  color: #333;
-  padding: 1rem 1.5rem;
-  border-radius: 15px;
-  font-size: 1.1rem;
-  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
 }
 
 .habit-complete-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
 }
 
 .habit-complete-btn:disabled {
-  background: linear-gradient(45deg, #a8edea, #fed6e3);
+  background: linear-gradient(135deg, #a8a8a8 0%, #8a8a8a 100%);
   cursor: not-allowed;
-  opacity: 0.8;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .habit-complete-btn.completed {
-  background: linear-gradient(45deg, #a8edea, #fed6e3);
-  color: #333;
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
 }
 
 /* Dopamine Animation */

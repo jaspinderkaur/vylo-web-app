@@ -40,13 +40,6 @@ function App() {
           <div className="habits-section">
             <div className="habits-header">
               <h2>Your {selectedMood} micro-habits</h2>
-              <button 
-                className="reset-button" 
-                onClick={handleReset}
-                aria-label="Choose a different mood"
-              >
-                Change mood
-              </button>
             </div>
 
             {loading && (
