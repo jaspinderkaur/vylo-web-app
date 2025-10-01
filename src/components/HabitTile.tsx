@@ -6,11 +6,13 @@ import { todayStr } from '../storage/habitsStore';
 interface HabitTileProps {
   habit: CustomHabit;
   onToggle: (habitId: string, completed: boolean) => void;
+  onDelete: (habit: CustomHabit) => void;
 }
 
-export const HabitTile = ({ habit, onToggle }: HabitTileProps) => {
+export const HabitTile = ({ habit, onToggle, onDelete }: HabitTileProps) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
   const today = todayStr();
   const isCompletedToday = habit.completions[today] || false;
 
@@ -36,8 +38,49 @@ export const HabitTile = ({ habit, onToggle }: HabitTileProps) => {
     setTimeout(() => setIsAnimating(false), 500);
   };
 
+  const handleLongPressStart = () => {
+    const timer = setTimeout(() => {
+      onDelete(habit);
+    }, 1000); // 1 second long press
+    setLongPressTimer(timer);
+  };
+
+  const handleLongPressEnd = () => {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      setLongPressTimer(null);
+    }
+  };
+
+  const handleMouseDown = () => {
+    handleLongPressStart();
+  };
+
+  const handleMouseUp = () => {
+    handleLongPressEnd();
+  };
+
+  const handleMouseLeave = () => {
+    handleLongPressEnd();
+  };
+
+  const handleTouchStart = () => {
+    handleLongPressStart();
+  };
+
+  const handleTouchEnd = () => {
+    handleLongPressEnd();
+  };
+
   return (
-    <div className={`habit-tile ${isCompletedToday ? 'completed' : ''} ${isAnimating ? 'animating' : ''}`}>
+    <div 
+      className={`habit-tile ${isCompletedToday ? 'completed' : ''} ${isAnimating ? 'animating' : ''}`}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="habit-tile-content">
         <div className="habit-info">
           <h3 className="habit-name">{habit.name}</h3>

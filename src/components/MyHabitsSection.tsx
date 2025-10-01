@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AddHabitModal } from './AddHabitModal';
+import { DeleteHabitModal } from './DeleteHabitModal';
 import { HabitTile } from './HabitTile';
 import { WeekBars } from './WeekBars';
 import { EmptyStateIcon } from './EmptyStateIcon';
@@ -12,6 +13,8 @@ export const MyHabitsSection = () => {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showWeekView, setShowWeekView] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [habitToDelete, setHabitToDelete] = useState<CustomHabit | null>(null);
 
   // Load habits on mount
   useEffect(() => {
@@ -75,6 +78,27 @@ export const MyHabitsSection = () => {
     }
   };
 
+  const handleDeleteHabit = (habit: CustomHabit) => {
+    setHabitToDelete(habit);
+    setDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = async (habitId: string) => {
+    try {
+      await habitsStore.deleteHabit(habitId);
+      
+      // Update local state
+      setHabits(prev => prev.filter(habit => habit.id !== habitId));
+    } catch (error) {
+      console.error('Failed to delete habit:', error);
+    }
+  };
+
+  const handleCloseDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setHabitToDelete(null);
+  };
+
   if (loading) {
     return (
       <div className="personal-habits-section">
@@ -126,21 +150,29 @@ export const MyHabitsSection = () => {
           <p>No habits yet. Click the button above to add your first habit!</p>
         </div>
       ) : (
-        <div className="habits-grid habits-grid-centered">
-          {habits.map(habit => (
-            <HabitTile
-              key={habit.id}
-              habit={habit}
-              onToggle={handleToggleHabit}
-            />
-          ))}
-        </div>
+            <div className="habits-grid habits-grid-centered">
+              {habits.map(habit => (
+                <HabitTile
+                  key={habit.id}
+                  habit={habit}
+                  onToggle={handleToggleHabit}
+                  onDelete={handleDeleteHabit}
+                />
+              ))}
+            </div>
       )}
 
       <AddHabitModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleAddHabit}
+      />
+
+      <DeleteHabitModal
+        isOpen={deleteModalOpen}
+        habit={habitToDelete}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
       />
     </div>
   );

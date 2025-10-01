@@ -4,6 +4,7 @@ import {
   getDocs, 
   addDoc, 
   updateDoc,
+  deleteDoc,
   getFirestore,
   serverTimestamp,
   query
@@ -128,6 +129,17 @@ const firestoreHabitsStore = {
       throw error;
     }
   },
+
+  async deleteHabit(id: string): Promise<void> {
+    try {
+      const uid = getAnonUid();
+      const habitRef = doc(db, 'users', uid, 'custom_habits', id);
+      await deleteDoc(habitRef);
+    } catch (error) {
+      console.error('Firestore deleteHabit error:', error);
+      throw error;
+    }
+  },
 };
 
 // --- LocalStorage Implementation ---
@@ -183,6 +195,12 @@ const localStorageHabitsStore = {
       }
     });
     return totalWins;
+  },
+
+  async deleteHabit(id: string): Promise<void> {
+    const habits = this._getHabits();
+    const filteredHabits = habits.filter(habit => habit.id !== id);
+    this._saveHabits(filteredHabits);
   },
 };
 
@@ -297,6 +315,20 @@ export const habitsStore = {
       }
     }
     return localStorageHabitsStore.getAccumulatedWins();
+  },
+
+  async deleteHabit(id: string): Promise<void> {
+    if (isFirestoreConfigured()) {
+      try {
+        await firestoreHabitsStore.deleteHabit(id);
+        return;
+      } catch (e) {
+        console.warn('Firestore failed, falling back to localStorage for deleteHabit:', e);
+        await localStorageHabitsStore.deleteHabit(id);
+        return;
+      }
+    }
+    await localStorageHabitsStore.deleteHabit(id);
   },
 
   // Utility methods

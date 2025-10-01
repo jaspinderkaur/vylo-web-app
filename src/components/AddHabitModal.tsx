@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { Modal } from './ui/Modal';
 import { track } from '../utils/plausible';
 import type { HabitCategory, Frequency } from '../types';
@@ -9,14 +9,51 @@ interface AddHabitModalProps {
   onSave: (habit: { name: string; category?: HabitCategory; frequency?: Frequency }) => void;
 }
 
-export const AddHabitModal = ({ isOpen, onClose, onSave }: AddHabitModalProps) => {
+export const AddHabitModal = memo(({ isOpen, onClose, onSave }: AddHabitModalProps) => {
   const [name, setName] = useState('');
   const [category, setCategory] = useState<HabitCategory | ''>('');
   const [frequency, setFrequency] = useState<'daily' | 'weekly' | 'custom'>('daily');
   const [customTimes, setCustomTimes] = useState(3);
   const [errors, setErrors] = useState<{ name?: string }>({});
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   const categories: HabitCategory[] = ['Energy', 'Focus', 'Self-care', 'Body', 'Mind', 'Other'];
+
+  // Focus the input when modal opens
+  useEffect(() => {
+    if (isOpen && nameInputRef.current) {
+      // Small delay to ensure modal is fully rendered
+      const timer = setTimeout(() => {
+        nameInputRef.current?.focus();
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  // Keep focus on input when typing
+  const handleNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  }, []);
+
+  // Handle input event for better focus management
+  const handleNameInput = useCallback((e: React.FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    setName(target.value);
+  }, []);
+
+  // Handle input blur - only refocus if focus leaves the modal entirely
+  const handleInputBlur = useCallback(() => {
+    // Use a longer delay to allow other form elements to work
+    setTimeout(() => {
+      const activeElement = document.activeElement;
+      const modal = document.querySelector('.modal-content');
+      
+      // Only refocus if focus moved completely outside the modal
+      if (nameInputRef.current && isOpen && modal && !modal.contains(activeElement)) {
+        nameInputRef.current.focus();
+      }
+    }, 150); // Longer delay to allow dropdowns to open
+  }, [isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,13 +105,15 @@ export const AddHabitModal = ({ isOpen, onClose, onSave }: AddHabitModalProps) =
             Habit Name *
           </label>
           <input
+            ref={nameInputRef}
             id="habit-name"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleNameChange}
+            onInput={handleNameInput}
+            onBlur={handleInputBlur}
             className={`form-input ${errors.name ? 'error' : ''}`}
             placeholder="e.g., Drink 8 glasses of water"
-            autoFocus
           />
           {errors.name && <span className="form-error">{errors.name}</span>}
         </div>
@@ -162,4 +201,4 @@ export const AddHabitModal = ({ isOpen, onClose, onSave }: AddHabitModalProps) =
       </form>
     </Modal>
   );
-};
+});

@@ -16,9 +16,6 @@ export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
       // Store the currently focused element
       previousActiveElement.current = document.activeElement as HTMLElement;
       
-      // Focus the modal
-      modalRef.current?.focus();
-      
       // Prevent body scroll
       document.body.style.overflow = 'hidden';
       
@@ -60,7 +57,6 @@ export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        tabIndex={-1}
       >
         <div className="modal-header">
           <h2 id="modal-title" className="modal-title">{title}</h2>
