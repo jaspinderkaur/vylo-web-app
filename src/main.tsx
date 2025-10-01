@@ -16,16 +16,27 @@ console.log('Analytics Debug:', {
   isProd: import.meta.env.PROD,
   analyticsEnabled: import.meta.env.VITE_ENABLE_ANALYTICS,
   hostname: window.location.hostname,
-  hostnameMatch: /\.?vylohub\.com$/.test(window.location.hostname)
+  hostnameMatch: /\.?vylohub\.com$/.test(window.location.hostname),
+  allEnvVars: import.meta.env
 });
 
-if (import.meta.env.PROD && 
-    import.meta.env.VITE_ENABLE_ANALYTICS === '1' && 
-    /\.?vylohub\.com$/.test(window.location.hostname)) {
+// More permissive conditions for testing
+const shouldLoadAnalytics = 
+  (import.meta.env.PROD && import.meta.env.VITE_ENABLE_ANALYTICS === '1') ||
+  (import.meta.env.VITE_ENABLE_ANALYTICS === '1' && /\.?vylohub\.com$/.test(window.location.hostname)) ||
+  (import.meta.env.VITE_ENABLE_ANALYTICS === '1' && window.location.hostname.includes('vylohub'));
+
+if (shouldLoadAnalytics) {
   console.log('Loading Plausible Analytics...');
   injectPlausible('vylohub.com');
 } else {
   console.log('Analytics not loaded - conditions not met');
+  console.log('Debug info:', {
+    isProd: import.meta.env.PROD,
+    analyticsEnabled: import.meta.env.VITE_ENABLE_ANALYTICS,
+    hostname: window.location.hostname,
+    shouldLoad: shouldLoadAnalytics
+  });
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

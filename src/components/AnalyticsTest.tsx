@@ -1,9 +1,15 @@
 import { track } from '../utils/plausible';
+import { forceLoadAnalytics } from '../utils/forceAnalytics';
 
 export const AnalyticsTest = () => {
   const testAnalytics = () => {
     console.log('Testing analytics...');
     track('test_event', { test: true });
+  };
+
+  const forceAnalytics = () => {
+    console.log('Force loading analytics...');
+    forceLoadAnalytics();
   };
 
   return (
@@ -23,9 +29,20 @@ export const AnalyticsTest = () => {
         border: 'none',
         padding: '5px 10px',
         borderRadius: '3px',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        marginRight: '5px'
       }}>
         Test Analytics
+      </button>
+      <button onClick={forceAnalytics} style={{
+        background: '#ff6b6b',
+        color: 'white',
+        border: 'none',
+        padding: '5px 10px',
+        borderRadius: '3px',
+        cursor: 'pointer'
+      }}>
+        Force Load
       </button>
     </div>
   );
